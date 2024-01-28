@@ -31,6 +31,15 @@ k port-forward svc/conductor 5000:5000
 k port-forward svc/conductor 8080:8080
 ```
 
+### To create a new workflow 
+
+Navigate to definitions on the conductor ui
+
+Click on the new workflow definition button
+
+In the definition field, paste the content of the sample-workflow.json file added in this repository
+
+
 ### To execute a new workflow 
 
 Send a POST request to http://127.0.0.1:5000/api/workflow
@@ -41,11 +50,14 @@ with a payload of
   "name": "<workflow name>"
 }
 ```
-if you have a workflow already created named "http" send the payload as below as a POST request
+
+if you have created a workflow from the step above already the created workflow is named named "sample_workflow_api_call" 
+
+Run the command below in your terminal to trigger the workflow
 
 ```
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"http"}' \
+  --data '{"name":"sample_workflow_api_call"}' \
   http://127.0.0.1:5000/api/workflow
 ```

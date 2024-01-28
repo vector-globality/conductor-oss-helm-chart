@@ -1,0 +1,91 @@
+{
+    "ownerApp": "vector",
+    "createTime": 1662278776157,
+    "updateTime": null,
+    "createdBy": null,
+    "updatedBy": null,
+    "accessPolicy": {},
+    "name": "sample_workflow_api_call",
+    "description": "This workflow gets a posts and its comment via api calls",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "get_random_post",
+        "taskReferenceName": "get_random_post",
+        "description": null,
+        "inputParameters": {
+          "http_request": {
+            "uri": "https://jsonplaceholder.typicode.com/posts/1",
+            "method": "GET",
+            "readTimeout": 60000,
+            "connectTimeout": 60000
+          }
+        },
+        "type": "HTTP",
+        "dynamicTaskNameParam": null,
+        "caseValueParam": null,
+        "caseExpression": null,
+        "scriptExpression": null,
+        "dynamicForkJoinTasksParam": null,
+        "dynamicForkTasksParam": null,
+        "dynamicForkTasksInputParamName": null,
+        "startDelay": 0,
+        "subWorkflowParam": null,
+        "sink": null,
+        "optional": false,
+        "taskDefinition": null,
+        "rateLimited": null,
+        "asyncComplete": false,
+        "loopCondition": null,
+        "retryCount": null,
+        "evaluatorType": null,
+        "expression": null
+      },
+      {
+        "name": "get_random_post_comments",
+        "taskReferenceName": "get_random_post_comments",
+        "description": "This calls an api to get the random post comments",
+        "inputParameters": {
+          "http_request": {
+            "uri": "https://jsonplaceholder.typicode.com/posts/1/comments",
+            "method": "GET",
+            "readTimeout": 60000,
+            "connectTimeout": 60000
+          }
+        },
+        "type": "HTTP",
+        "dynamicTaskNameParam": null,
+        "caseValueParam": null,
+        "caseExpression": null,
+        "scriptExpression": null,
+        "dynamicForkJoinTasksParam": null,
+        "dynamicForkTasksParam": null,
+        "dynamicForkTasksInputParamName": null,
+        "startDelay": 0,
+        "subWorkflowParam": null,
+        "sink": null,
+        "optional": false,
+        "taskDefinition": null,
+        "rateLimited": null,
+        "asyncComplete": false,
+        "loopCondition": null,
+        "retryCount": null,
+        "evaluatorType": null,
+        "expression": null
+      }
+    ],
+    "inputParameters": [],
+    "outputParameters": {
+      "data": "${get_random_post_comments.output.response.body.data}",
+      "source": "${get_random_post_comments.output.response.body.source}"
+    },
+    "failureWorkflow": null,
+    "schemaVersion": 2,
+    "restartable": true,
+    "workflowStatusListenerEnabled": false,
+    "ownerEmail": "example@email.com",
+    "timeoutPolicy": "ALERT_ONLY",
+    "timeoutSeconds": 0,
+    "variables": {},
+    "inputTemplate": {}
+  }
