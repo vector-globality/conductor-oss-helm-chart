@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "conductor.fullname" . }}
+spec:
+  replicas: {{ .Values.conductor.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "conductor.name" . }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "conductor.name" . }}
+    spec:
+      containers:
+        - name: conductor
+          image: "{{ .Values.conductor.image.repository }}:{{ .Values.conductor.image.tag }}"
+          imagePullPolicy: {{ .Values.conductor.image.pullPolicy }}
+          ports:
+            - name: swagger-ui-port
+              containerPort: {{ .Values.conductor.swagger_ui.port }}
+            - name: conductor-port
+              containerPort: {{ .Values.conductor.conductor_ui.port }}
+          
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "conductor.name" . }}
+spec:
+  type: {{ .Values.conductor.type }}
+  ports:
+    - name: swagger-ui
+      port: {{ .Values.conductor.swagger_ui.port }}
+      targetPort: {{ .Values.conductor.swagger_ui.port }}
+    - name: conductor-ui
+      port: {{ .Values.conductor.conductor_ui.port }}
+      targetPort: {{ .Values.conductor.conductor_ui.port }}
+  selector:
+    app.kubernetes.io/name: {{ include "conductor.name" . }}

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: conductor
+description: A Simple Helm chart for Conductor OSS
+version: 0.1.0

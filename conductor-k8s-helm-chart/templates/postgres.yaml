@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conductor-postgres
+spec:
+  selector:
+    matchLabels:
+      app: conductor-postgres
+  template:
+    metadata:
+      labels:
+        app: conductor-postgres
+    spec:
+      containers:
+        - name: conductor-postgres
+          image: {{ .Values.postgres.image }}
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: {{ .Values.postgres.port }}
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.postgres.env.POSTGRES_USER }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.env.POSTGRES_PASSWORD }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conductor-postgres
+spec:
+  selector:
+    app: conductor-postgres
+  ports:
+    - port: {{ .Values.postgres.exposed_port }}
+      targetPort: {{ .Values.postgres.port }}

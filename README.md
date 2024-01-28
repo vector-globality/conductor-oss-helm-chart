@@ -1,4 +1,6 @@
-# How to run Conductor locally
+# conductor-oss-helm-chart
+
+## How to run Conductor locally
 ---
 #### Setup
 You need to Minikube or Kind cluster running on your local or dev environment
@@ -45,4 +47,4 @@ if you have a workflow already created named "http" send the payload as below as
 {
   "name": "http"
 }
-```# conductor-oss-helm-chart
+```
