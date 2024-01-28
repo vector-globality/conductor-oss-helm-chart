@@ -44,7 +44,8 @@ with a payload of
 if you have a workflow already created named "http" send the payload as below as a POST request
 
 ```
-{
-  "name": "http"
-}
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"name":"http"}' \
+  http://127.0.0.1:5000/api/workflow
 ```
