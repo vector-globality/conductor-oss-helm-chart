@@ -23,12 +23,12 @@ helm upgrade conductor conductor-k8s-helm-chart/
 
 ##### Conductor UI
 ```
-k port-forward svc/conductor 5000:5000
+kubectl port-forward svc/conductor 5000:5000
 ```
 
 ##### Swagger UI
 ```
-k port-forward svc/conductor 8080:8080
+kubectl port-forward svc/conductor 8080:8080
 ```
 
 ### To create a new workflow 
